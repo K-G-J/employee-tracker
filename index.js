@@ -23,20 +23,36 @@ const choicesObj = {
     'Delete an employee': deleteEmployee,
     'EXIT': exitApp
 }
-const prompt = async () => {
-    const answer = await inquirer.prompt({
-        name: 'choice',
-        type: 'list',
-        message: 'What would you like to do?',
-        choices: Object.keys(choicesObj)
-    })
-    if (answer) {
-        choicesObj[answer.choice](); 
-        setTimeout(function(){
-            prompt(); // recursion after 2s
-        }, 2000);
-    }
+function prompt() {
+    inquirer.prompt([
+        {
+            name: 'choice',
+            type: 'list',
+            message: 'What would you like to do?',
+            choices: Object.keys(choicesObj)
+        }
+    ]).then(answer => {
+        new Promise(function (res) {
+            choicesObj[answer.choice]()
+            // res(prompt())
+        });
+    });
 };
+
+// const prompt = async () => {
+//     const answer = await inquirer.prompt({
+//         name: 'choice',
+//         type: 'list',
+//         message: 'What would you like to do?',
+//         choices: Object.keys(choicesObj)
+//     })
+//     if (answer) {
+//         choicesObj[answer.choice](); 
+//         setTimeout(function(){
+//             prompt(); // recursion after 2s
+//         }, 2000);
+//     }
+// };
 // connect to database 
 db.connect(err => {
     if (err) throw err;
