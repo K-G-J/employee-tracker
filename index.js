@@ -83,6 +83,7 @@ db.connect(err => {
 });
 // exit the app
 function exitApp() {
+    console.log('Thank you for using the employee-tracker!')
     db.end();
 };
 // start the app 
