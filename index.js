@@ -8,7 +8,7 @@ const { updateRole, updateManager } = require('./lib/updateFuncs');
 const { deleteDepartment, deleteRole, deleteEmployee } = require('./lib/deleteFuncs');
 
 function prompt() {
-    return inquirer.prompt({
+    inquirer.prompt({
         name: 'choice',
         type: 'list',
         message: 'What would you like to do?',
@@ -31,19 +31,34 @@ function prompt() {
     }).then(answer => {
         switch (answer.choice) {
             case 'View all departments':
-                viewDepartments();
+                new Promise(function (res) {
+                    viewDepartments()
+                    res(console.log('\n'), prompt())
+                })
                 break;
             case 'View all roles':
-                viewRoles();
+                new Promise(function (res) {
+                    viewRoles()
+                    res(prompt())
+                })
                 break;
             case 'View all employees':
-                viewEmployees();
+                new Promise(function (res) {
+                    viewEmployees()
+                    res(prompt())
+                })
                 break;
             case 'View employees by manager':
-                viewByManager();
+                new Promise(function (res) {
+                    viewByManager()
+                    res(prompt());
+                })
                 break;
             case 'View employees by department':
-                viewByDepartment();
+                new Promise(function (res) {
+                    viewByDepartment()
+                    res(prompt());
+                })
                 break;
             case 'Add a department':
                 addDepartment();
