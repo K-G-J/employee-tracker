@@ -1,5 +1,14 @@
 const db = require('./db/connection');
 const inquirer = require('inquirer');
+
+// connect to database 
+db.connect(err => {
+    if (err) throw err;
+    console.log('Welcome to the employee-tracker!');
+    // start the app 
+    prompt();
+});
+
 // response handling 
 const { viewDepartments, viewRoles, viewEmployees, viewByManager, viewByDepartment } = require('./lib/viewFuncs');
 const { addDepartment, addRole, addEmployee } = require('./lib/addFuncs');
@@ -9,7 +18,7 @@ const { deleteDepartment, deleteRole, deleteEmployee } = require('./lib/deleteFu
 function prompt() {
     inquirer.prompt({
         name: 'choice',
-        tye: 'list',
+        type: 'list',
         message: 'What would you like to do?',
         choices: [
             'View all departments', 
@@ -76,15 +85,9 @@ function prompt() {
         }
     });
 };
-// connect to database 
-db.connect(err => {
-    if (err) throw err;
-    console.log('Welcome to the employee-tracker!');
-});
+
 // exit the app
 function exitApp() {
     console.log('Thank you for using the employee-tracker!')
     db.end();
 };
-// start the app 
-prompt();
