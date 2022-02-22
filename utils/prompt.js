@@ -4,7 +4,7 @@ const db = require('../db/connection');
 const inquirer = require('inquirer');
 
 // response handling 
-const { viewDepartments, viewRoles, viewEmployees, viewByManager, viewByDepartment } = require('./viewFuncs');
+const { viewDepartments, viewRoles, viewEmployees, viewByManager, viewByDepartment, viewBudget } = require('./viewFuncs');
 const { addDepartment, addRole, addEmployee } = require('./addFuncs');
 const { updateRole, updateManager } = require('./updateFuncs');
 const { deleteDepartment, deleteRole, deleteEmployee } = require('./deleteFuncs');
@@ -14,7 +14,8 @@ const choicesObj = {
     'View all roles': viewRoles, 
     'View all employees': viewEmployees,
     'View employees by manager': viewByManager,
-    'View employees by department': viewByDepartment, 
+    'View employees by department': viewByDepartment,
+    'View department budget': viewBudget, 
     'Add a department': addDepartment, 
     'Add a role': addRole,
     'Add an employee': addEmployee, 

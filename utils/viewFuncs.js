@@ -1,4 +1,4 @@
-module.exports = { viewDepartments, viewRoles, viewEmployees, viewByManager, viewByDepartment };
+module.exports = { viewDepartments, viewRoles, viewEmployees, viewByManager, viewByDepartment, viewBudget};
 
 const db = require('../db/connection');
 const prompt = require('./prompt');
@@ -57,4 +57,15 @@ function viewByDepartment() {
         }, 2000);
     })
 };
-
+// view department budget 
+function viewBudget() {
+    const sql = `SELECT department_id AS ID, department.name AS Department, SUM(salary) AS Budget FROM  role JOIN department ON role.department_id = department.id GROUP BY  department_id`;
+    db.query(sql, (err, res) => {
+        if (err) throw err;
+        console.table('\nDepartment Budgets:', res);
+        setTimeout(function() {
+            prompt();
+        }, 2000)
+    })
+    
+}
