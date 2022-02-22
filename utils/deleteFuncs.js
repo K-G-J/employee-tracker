@@ -4,7 +4,7 @@ const db = require('../db/connection');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const prompt = require('./prompt');
-const { getRoles } = require('./addFuncs')
+const { getRoles } = require('./addFuncs');
 
 // delete a department 
 function deleteDepartment() {

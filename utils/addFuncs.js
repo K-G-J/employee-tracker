@@ -134,7 +134,7 @@ function addEmployee() {
         },
     ])
     .then(answers => {
-        const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
+        const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
         const params = [answers.first_name, answers.last_name, answers.role_id, answers.manager_id];
         db.query(sql, params, (err) => {
             if (err) throw err;

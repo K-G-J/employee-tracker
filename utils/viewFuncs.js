@@ -2,7 +2,7 @@ module.exports = { viewDepartments, viewRoles, viewEmployees, viewByManager, vie
 
 const db = require('../db/connection');
 const prompt = require('./prompt');
-const { getManagers } = require('./addFuncs')
+const { getManagers } = require('./addFuncs');
 
 // view all departments
 function viewDepartments() {
