@@ -19,6 +19,25 @@ User can add, update, and delete departments, roles, and employees
 2. Go to app.js
 3. Open terminal and run "npm init"
 4. Run "npm i mysql2"
-5. Run "npm i console.table --save"
-6. Run "npm i inquirer"
-7. Run "npm start"
+6. Run "npm i console.table --save"
+7. Run "npm i inquirer"
+8. Run "npm start"
+
+## Important installation note
+- there is a db/connection.js file not in this repo for security purposes, to test you will need to copy to creat a db/connection.js file and copy this code 
+```js
+const mysql = require('mysql2');
+
+// Connect to database 
+const db = mysql.createConnection(
+    {
+        host: 'localhost',
+        user: 'root',
+        password: 'YOUR MYSQL PASSWORD HERE',
+        database: 'employee'
+    },
+    console.log('Connected to the employee database.')
+);
+
+module.exports = db;
+```
