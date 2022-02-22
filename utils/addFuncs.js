@@ -39,17 +39,16 @@ function addDepartment() {
             }
         }
     ]).then(answers => {
-        db.query('INSERT INTO department SET ?', {
-            name: answers.name
-        }).then(function() {
-            return db.query('SELECT * FROM department');
-        }).spread(function (res) {
-            console.log('Department added!');
-            console.table('\nAll Departments:', res);
-            setTimeout(function() {
-                prompt();
-            }, 2000);
-        });
+        db.query('INSERT INTO department SET ?', { name: answers.name }) 
+        setTimeout(function() {
+            db.query('SELECT * FROM department', res => {
+                    console.log('Department added!');
+                    console.table('\nAll Departments:', res);
+                setTimeout(function() {
+                    prompt();
+                }, 2000);
+            });
+        }, 3000)
     });
 };
 // add a role 
@@ -74,17 +73,15 @@ function addRole() {
             message: "What is the role's salary?"
         }
     ]).then(answers => {
-        db.query('INSERT INTO role SET?', {
-            title: answers.title,
-            salary: answers.salary
-        }).then(function() {
-            return db.query('SELECT * FROM role');
-        }).spread(function (res) {
-            console.table('\nAll Roles:', res);
-            setTimeout(function() {
-                prompt();
-            }, 2000);
-        });
+        db.query('INSERT INTO role SET?', { title: answers.title, salary: answers.salary })
+        setTimeout(function() {
+            db.query('SELECT * FROM role', res => {
+                console.table('\nAll Roles:', res);
+                setTimeout(() => {
+                    prompt();
+                }, 2000);
+            });
+        }, 3000)
     });
 };
 // add an employee

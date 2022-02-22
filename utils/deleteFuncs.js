@@ -8,36 +8,32 @@ const { getRoles } = require('./addFuncs');
 
 // delete a department 
 function deleteDepartment() {
-        inquirer.prompt([
-            {
-                name: 'dept',
-                type: 'list',
-                message: 'Which department would you like to delete?',
-                choices: function() {
-                    departmentsArr = [];
-                    db.query('SELECT * FROM department', (err, res) => {
-                        if (err) throw err;
-                        for (var d of res) {
-                            departmentsArr.push(d.name)
-                        }
-                    })
-                    return departmentsArr;
+        db.query('SELECT * FROM department', (err, res) => {
+            if (err) throw err; 
+            const departments = res.map(({ name, id }) => ({ name: name, value: id }));
+            inquirer.prompt([
+                {
+                    name: 'dept',
+                    type: 'list',
+                    message: 'Which department would you like to delete?',
+                    choices: departments
                 }
-            }
-        ]).then(answer => {
-            db.promise().query('DELETE FROM department WHERE name = ?', answer.dept, (err) => {
-                if (err) throw err;
-                console.log('Department deleted!')
-        }).then(
-            db.query('SELECT * FROM department', (err, res) => {
-                if (err) throw err;
-                console.table('\nAll Departments:', res)
-                setTimeout(function() {
-                    prompt();
-                }, 2000);
+            ]).then(answer => {
+                db.query('DELETE FROM department WHERE id = ?', answer.dept, (err) => {
+                    if (err) throw err;
+                    console.log('Department deleted!')
+                    setTimeout(function() {
+                        db.query('SELECT * FROM department', (err, res) => {
+                        if (err) throw err;
+                        console.table('\nAll Departments:', res)
+                        setTimeout(function() {
+                            prompt();
+                        }, 3000);
+                    })
+                }, 2000)
             })
-        )
-    });
+        });
+    })
 };
 //delete a role
 function deleteRole() {
@@ -51,25 +47,26 @@ function deleteRole() {
                 }
             }
         ]).then(answer => {
-            db.promise().query('DELETE FROM role WHERE id = ?', answer.role_id, (err) => {
+            db.query('DELETE FROM role WHERE id = ?', answer.role_id, (err) => {
                 if (err) throw err;
                 console.log("Role deleted!")
-        }).then(
-            db.query('SELECT * FROM role', (err, res) => {
-                if (err) throw err;
-                console.table('\nAll Roles:', res)
                 setTimeout(function() {
-                    prompt();
-                }, 2000);
-            })
-        )
+                    db.query('SELECT * FROM role', (err, res) => {
+                    if (err) throw err;
+                    console.table('\nAll Roles:', res)
+                    setTimeout(function() {
+                        prompt();
+                    }, 3000);
+                })
+            }, 2000)
+        })
     })
 }
 // delete an employee 
 function deleteEmployee() {
     db.query('SELECT * FROM employee', (err, res) => {
     if (err) throw err; 
-    const employees = res.map(({ id, first_name, last_name }) => ({ name: `${first_name} ${last_name}`, id: id }));
+    const employees = res.map(({ id, first_name, last_name }) => ({ name: `${first_name} ${last_name}`, value: id }));
     inquirer.prompt([
         {
             type: 'list',
@@ -78,18 +75,19 @@ function deleteEmployee() {
             choices: employees
         }
         ]).then(empChoice => {
-            connection.query('DELETE FROM employee WHERE id = ?', empChoice.name, (err) => {
+                db.query('DELETE FROM employee WHERE id = ?', empChoice.name, (err) => {
                 if (err) throw err;
                 console.log("Successfully deleted!");
-            }).then(
-                db.query('SELECT * FROM employee', (err, res) => {
-                    if (err) throw err;
-                    console.table('\nAll Employees:', res)
-                    setTimeout(function() {
-                        prompt();
-                    }, 2000);
-                })
-            )
+                setTimeout(function() {
+                    db.query('SELECT * FROM employee', (err, res) => {
+                        if (err) throw err;
+                        console.table('\nAll Employees:', res)
+                        setTimeout(function() {
+                            prompt();
+                        }, 3000);
+                    })
+                }, 2000)
+            })
         })
     });
 }

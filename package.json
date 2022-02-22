@@ -43,6 +43,7 @@
     "mimic-fn": "^2.1.0",
     "mute-stream": "^0.0.8",
     "mysql2": "^2.3.3",
+    "mysql2-promise": "^0.1.4",
     "named-placeholders": "^1.1.2",
     "onetime": "^5.1.2",
     "ora": "^5.4.1",
