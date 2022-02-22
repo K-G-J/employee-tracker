@@ -1,3 +1,5 @@
+module.exports = prompt;
+
 const db = require('../db/connection');
 const inquirer = require('inquirer');
 
@@ -34,23 +36,7 @@ function prompt() {
             message: 'What would you like to do?',
             choices: Object.keys(choicesObj),
         }
-    ]).then(answer => {
+    ]).then (answer => {
         choicesObj[answer.choice]();
-        console.log('\n');
-        return new Promise((resolve) => {
-            resolve(inquirer.prompt([
-                {
-                    name: 'confirm',
-                    type: 'confirm',
-                    message: 'Would you like to continue?',
-                    default: true
-                }
-            ]).then(response => {
-                response.confirm ? prompt() : choicesObj['EXIT']();
-            })
-            )
-        })
     })
-};
-
-module.exports = prompt;
+}

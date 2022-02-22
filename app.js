@@ -1,6 +1,6 @@
-const inquirer = require('inquirer');
 const db = require('./db/connection');
-const prompt = require('./lib/prompt')
+const prompt = require('./utils/prompt')
+// response handling 
 
 // connect to database 
 db.connect(err => {

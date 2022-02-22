@@ -1,6 +1,9 @@
+module.exports = { updateRole, updateManager };
+
 const db = require('../db/connection');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+const prompt = require('./prompt');
 
 const { getRoles, getManagers } = require('./addFuncs')
 
@@ -49,6 +52,9 @@ function updateRole() {
                 if (err) throw err;
                 console.log("Employee role updated!");
                 console.table(answers);
+                setTimeout(function() {
+                    prompt();
+                }, 2000);
             })
         })
     });
@@ -98,9 +104,10 @@ function updateManager() {
                 if (err) throw err;
                 console.log("Employee manager updated!");
                 console.table(answers);
+                setTimeout(function() {
+                    prompt();
+                }, 2000);
             })
         })
     });
 }
-
-module.exports = { updateRole, updateManager };

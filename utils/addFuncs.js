@@ -1,13 +1,16 @@
+module.exports = { addDepartment, addRole, addEmployee, getRoles, getManagers };
+
 const db = require('../db/connection');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+const prompt = require('./prompt');
 
 // get roles for adding employee
 function getRoles() {
     db.query('SELECT * FROM role', (err, res) => {
         if (err) throw err;
         const roles = res.map(({ id, title }) => ({ title: title, id: id }))
-        return console.table(roles);
+        return console.table('\nRole IDs:', roles);
     });
 };
 // get managers for adding employee
@@ -15,7 +18,7 @@ function getManagers() {
     db.query('SELECT first_name, last_name, id FROM employee WHERE manager_id IS NULL', (err, res) => {
         if (err) throw err;
         const managers = res.map(({ id, first_name, last_name }) => ({ name: `${first_name} ${last_name}`, id: id }))
-        return console.table(managers);
+        return console.table('\nManager IDs', managers);
     });
 };
 
@@ -43,6 +46,9 @@ function addDepartment() {
         }).spread(function (res) {
             console.log('Department added!');
             console.table('\nAll Departments:', res);
+            setTimeout(function() {
+                prompt();
+            }, 2000);
         });
     });
 };
@@ -75,6 +81,9 @@ function addRole() {
             return db.query('SELECT * FROM role');
         }).spread(function (res) {
             console.table('\nAll Roles:', res);
+            setTimeout(function() {
+                prompt();
+            }, 2000);
         });
     });
 };
@@ -131,7 +140,9 @@ function addEmployee() {
             if (err) throw err;
             console.log('Your employee has been added!');
             console.table(answers);
+            setTimeout(function() {
+                prompt();
+            }, 2000);
         })
     })
 }
-module.exports = { addDepartment, addRole, addEmployee, getRoles, getManagers };

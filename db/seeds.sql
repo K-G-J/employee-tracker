@@ -26,16 +26,22 @@ VALUE ("Lawyer", 190000, 4);
 
 -- EMPLOYEE SEEDS --
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Jessica", "Haze", 1, null);
+VALUE ("Summer", "Smith", 1, null);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Tiffany", "Patric", 2, null);
+VALUE ("Morty", "Smith", 2, null);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Mia","Lam", 3 , null);
+VALUE ("Rick","Sanchez", 3 , null);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Bently", "Lao", 4, 1);
+VALUE ("Jerry", "Smith", 4, 1);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Chris", "Melby", 5, 4);
+VALUE ("Beth", "Smith", 5, 2);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Jason", "Baker", 6, 1);
+VALUE ("Krombopulos", "Michael", 6, 1);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUE ("Tom", "Smith", 7, 2);
+VALUE ("Scary", "Terry", 1, 3);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Tiny", "Rick", 7, 3);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Bird", "Person", 5, 1);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUE ("Pickle", "Rick", 6, 2);

@@ -1,6 +1,9 @@
+module.exports = { deleteDepartment, deleteRole, deleteEmployee };
+
 const db = require('../db/connection');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+const prompt = require('./prompt');
 const { getRoles } = require('./addFuncs')
 
 // delete a department 
@@ -29,6 +32,9 @@ function deleteDepartment() {
             db.query('SELECT * FROM department', (err, res) => {
                 if (err) throw err;
                 console.table('\nAll Departments:', res)
+                setTimeout(function() {
+                    prompt();
+                }, 2000);
             })
         )
     });
@@ -52,6 +58,9 @@ function deleteRole() {
             db.query('SELECT * FROM role', (err, res) => {
                 if (err) throw err;
                 console.table('\nAll Roles:', res)
+                setTimeout(function() {
+                    prompt();
+                }, 2000);
             })
         )
     })
@@ -76,10 +85,11 @@ function deleteEmployee() {
                 db.query('SELECT * FROM employee', (err, res) => {
                     if (err) throw err;
                     console.table('\nAll Employees:', res)
+                    setTimeout(function() {
+                        prompt();
+                    }, 2000);
                 })
             )
         })
     });
 }
-
-module.exports = { deleteDepartment, deleteRole, deleteEmployee };
