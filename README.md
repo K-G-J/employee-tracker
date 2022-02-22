@@ -41,3 +41,9 @@ const db = mysql.createConnection(
 
 module.exports = db;
 ```
+To seed the databse with sample data run the following terminal commands
+1) mysql2 -u root -p 
+2) input your password
+3) source db/schema.sql
+4) source db/seeds.sql
+5) quit;
