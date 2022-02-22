@@ -32,7 +32,7 @@ function updateRole() {
                 choices: function() {
                     lastNames = [];
                     for (var e of res) {
-                        firstNames.push(e.last_name)
+                        lastNames.push(e.last_name)
                     }
                     return lastNames;
                 }
