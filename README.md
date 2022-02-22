@@ -8,7 +8,11 @@ SO THAT I can organize and plan my business
 ## Description 
 Application allows user to view departments, roles, employees, and total budget
 User can add, update, and delete departments, roles, and employees
+
 [DEMO](https://youtu.be/64j7wZE5RE8)
+
+<img width="466" alt="Employee-tracker Screenshot" src="https://user-images.githubusercontent.com/91970214/155102989-f490e302-ded1-4600-960a-23c9855d563b.png">
+
 
 ## Installation 
 1. Clone the repository
