@@ -75,7 +75,8 @@ function addRole() {
                     console.log("Please enter the role title");
                     return false;
                 }
-            }
+            },
+            default: NULL
         },
         {
             name: 'salary',
@@ -141,7 +142,8 @@ function addEmployee() {
             message: function(){
                 console.log("\nWhat is employee's role ID number?\n")
                 getRoles();
-            }
+            },
+            default: NULL
         },
         {
             name: 'manager_id',
@@ -149,7 +151,8 @@ function addEmployee() {
             message: function(){
                 console.log("\nWhat is the employee's manager ID number? Leave blank or input NULL if manager.\n")
                 getManagers();
-            }
+            },
+            default: NULL
         },
     ])
     .then(answers => {

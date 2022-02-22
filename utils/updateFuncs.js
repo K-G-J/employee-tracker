@@ -43,7 +43,8 @@ function updateRole() {
                 message: function(){
                     console.log("\nWhat is the employee's new role ID number? Leave blank or input NULL if manager.")
                     getRoles();
-                }
+                },
+                default: NULL
             }
         ]).then(answers => {
             const sql = `UPDATE employee SET role_id = ? WHERE first_name = ? AND last_name = ?`;
@@ -92,10 +93,11 @@ function updateManager() {
             {
                 name: 'manager_id',
                 type: 'input',
-                message: function(){
+                message: function() {
                     console.log("\nWhat is the employee's new manager ID number?\n")
                     getManagers();
-                }
+                },
+                default: NULL
             }
         ]).then(answers => {
             const sql = `UPDATE employee SET manager_id = ? WHERE first_name = ? AND last_name = ?`;
