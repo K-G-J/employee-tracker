@@ -24,7 +24,7 @@ User can add, update, and delete departments, roles, and employees
 8. Run "npm start"
 
 ## Important installation note
-- there is a db/connection.js file not in this repo for security purposes, to test you will need to copy to creat a db/connection.js file and copy this code 
+*there is a db/connection.js file not in this repo for security purposes, to test you will need to copy this code into your own db/connection.js file* 
 ```js
 const mysql = require('mysql2');
 
