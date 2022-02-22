@@ -1,4 +1,4 @@
-module.exports = { addDepartment, addRole, addEmployee, getRoles, getManagers };
+module.exports = { addDepartment, addRole, addEmployee, getRoles, getManagers, getDepartments };
 
 const db = require('../db/connection');
 const inquirer = require('inquirer');
@@ -21,6 +21,13 @@ function getManagers() {
         return console.table('\nManager IDs', managers);
     });
 };
+function getDepartments() {
+    db.query('SELECT * FROM department', (err, res) => {
+        if (err) throw err;
+        const departments = res.map(({ name, id }) => ({ name: name, id: id }))
+        return console.table('\nDepartment IDs', departments)
+    })
+}
 
 // add a department 
 function addDepartment() {
@@ -74,9 +81,17 @@ function addRole() {
             name: 'salary',
             type: 'input',
             message: "What is the role's salary?"
+        },
+        {
+            name: 'department_id',
+            type: 'input',
+            message: function(){
+                console.log("\nWhat is role's department ID number?\n")
+                getDepartments();
+            }
         }
     ]).then(answers => {
-            db.query('INSERT INTO role SET?', { title: answers.title, salary: answers.salary }, (err) => {
+            db.query('INSERT INTO role SET?', { title: answers.title, salary: answers.salary, department_id: answers.department_id }, (err) => {
                 if (err) throw err;
                 console.log('Role added!')
                 setTimeout(function() {
