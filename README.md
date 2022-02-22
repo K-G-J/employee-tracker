@@ -6,7 +6,7 @@ I WANT to be able to view and manage the departments, roles, and employees in my
 SO THAT I can organize and plan my business
 
 ## Description 
-Application allows user to view departments, roles, employees, and total budget
+Node.js application that allows user to view departments, roles, employees, and total budget
 User can add, update, and delete departments, roles, and employees
 
 [DEMO](https://youtu.be/64j7wZE5RE8)
