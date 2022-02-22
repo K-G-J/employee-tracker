@@ -38,17 +38,20 @@ function addDepartment() {
                 }
             }
         }
-    ]).then(answers => {
-        db.query('INSERT INTO department SET ?', { name: answers.name }) 
-        setTimeout(function() {
-            db.query('SELECT * FROM department', res => {
-                    console.log('Department added!');
-                    console.table('\nAll Departments:', res);
+    ]).then(answer => {
+            db.query('INSERT INTO department SET ?', { name: answer.name }, (err) => {
+                if (err) throw err;
+                console.log('Department added!')
                 setTimeout(function() {
-                    prompt();
-                }, 2000);
-            });
-        }, 3000)
+                    db.query('SELECT * FROM department', (err, res) => {
+                    if (err) throw err;
+                    console.table('\nAll Departments:', res)
+                    setTimeout(function() {
+                        prompt();
+                    }, 3000);
+                })
+            }, 2000)
+        })
     });
 };
 // add a role 
@@ -73,15 +76,19 @@ function addRole() {
             message: "What is the role's salary?"
         }
     ]).then(answers => {
-        db.query('INSERT INTO role SET?', { title: answers.title, salary: answers.salary })
-        setTimeout(function() {
-            db.query('SELECT * FROM role', res => {
-                console.table('\nAll Roles:', res);
-                setTimeout(() => {
-                    prompt();
-                }, 2000);
-            });
-        }, 3000)
+            db.query('INSERT INTO role SET?', { title: answers.title, salary: answers.salary }, (err) => {
+                if (err) throw err;
+                console.log('Role added!')
+                setTimeout(function() {
+                    db.query('SELECT * FROM role', (err, res) => {
+                    if (err) throw err;
+                    console.table('\nAll Roles:', res)
+                    setTimeout(function() {
+                        prompt();
+                    }, 3000);
+                })
+            }, 2000)
+        })
     });
 };
 // add an employee
